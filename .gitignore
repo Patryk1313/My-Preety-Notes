@@ -1,0 +1,35 @@
+# Node / package artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build outputs
+/dist/
+/.cache/
+/.tmp/
+
+# Logs
+logs/
+*.log
+
+# Environment / secrets
+.env
+.env.local
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# App-specific
+uploads/
+projects/*.pdf
+projects/*.tmp
+# Keep JSON metadata but ignore large generated binaries
+# Uncomment if you want to ignore project JSON files as well:
+# projects/*.json
+
+# Puppeteer/Chromium cache (if any)
+~/.cache/puppeteer

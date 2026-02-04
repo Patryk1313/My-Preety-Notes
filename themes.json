@@ -1,0 +1,180 @@
+{
+  "themes": {
+    "default": {
+      "name": "Pastel Dream",
+      "description": "Soft pastel pink and blue aesthetic",
+      "colors": {
+        "background": "#fffaf6",
+        "headerText": "#ff9fb0",
+        "decorHeader": "#ff7fa0",
+        "sticker": "#ffd6e0",
+        "accent": "#ffb86b",
+        "bodyBg": "linear-gradient(180deg, #f6f3ef 0%, #fff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "mint": {
+      "name": "Mint Fresh",
+      "description": "Cool mint green and aqua tones",
+      "colors": {
+        "background": "#f0fffb",
+        "headerText": "#4db8a8",
+        "decorHeader": "#2d9d8f",
+        "sticker": "#c2f0ea",
+        "accent": "#52c9b3",
+        "bodyBg": "linear-gradient(180deg, #f0fffb 0%, #fff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "peach": {
+      "name": "Warm Peach",
+      "description": "Warm sunset peach and coral vibes",
+      "colors": {
+        "background": "#fff5f0",
+        "headerText": "#e8956f",
+        "decorHeader": "#d67c52",
+        "sticker": "#ffd4b8",
+        "accent": "#f4a460",
+        "bodyBg": "linear-gradient(180deg, #fff5f0 0%, #fff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "lavender": {
+      "name": "Lavender Calm",
+      "description": "Soothing lavender and soft purple",
+      "colors": {
+        "background": "#f5f0ff",
+        "headerText": "#a67fd9",
+        "decorHeader": "#8b5fbf",
+        "sticker": "#e0d4f7",
+        "accent": "#b89edb",
+        "bodyBg": "linear-gradient(180deg, #f5f0ff 0%, #fff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "sunset": {
+      "name": "Sunset Gold",
+      "description": "Golden hour and warm orange tones",
+      "colors": {
+        "background": "#fffaed",
+        "headerText": "#e8a547",
+        "decorHeader": "#d48c2f",
+        "sticker": "#ffd98d",
+        "accent": "#f5b041",
+        "bodyBg": "linear-gradient(180deg, #fffaed 0%, #fff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "ocean": {
+      "name": "Ocean Blue",
+      "description": "Deep ocean blues and aqua depths",
+      "colors": {
+        "background": "#e8f4f8",
+        "headerText": "#0066cc",
+        "decorHeader": "#004499",
+        "sticker": "#a8d8ff",
+        "accent": "#0099ff",
+        "bodyBg": "linear-gradient(180deg, #e8f4f8 0%, #f5fbff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "forest": {
+      "name": "Forest Green",
+      "description": "Natural forest greens and earth tones",
+      "colors": {
+        "background": "#f0f8f0",
+        "headerText": "#2d7d3e",
+        "decorHeader": "#1a5c2a",
+        "sticker": "#b8e6c8",
+        "accent": "#4da660",
+        "bodyBg": "linear-gradient(180deg, #f0f8f0 0%, #f5fdf5 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "rose": {
+      "name": "Rose Gold",
+      "description": "Elegant rose and rose gold palette",
+      "colors": {
+        "background": "#fdf6f5",
+        "headerText": "#c86d6d",
+        "decorHeader": "#a94545",
+        "sticker": "#f5d6d6",
+        "accent": "#d98888",
+        "bodyBg": "linear-gradient(180deg, #fdf6f5 0%, #fff9f8 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "indigo": {
+      "name": "Indigo Night",
+      "description": "Deep indigo and mysterious night tones",
+      "colors": {
+        "background": "#f0ebf8",
+        "headerText": "#4a3f7f",
+        "decorHeader": "#2f1f5c",
+        "sticker": "#ddd0f0",
+        "accent": "#6b5fb5",
+        "bodyBg": "linear-gradient(180deg, #f0ebf8 0%, #f8f5ff 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "coral": {
+      "name": "Coral Reef",
+      "description": "Vibrant coral and tropical vibes",
+      "colors": {
+        "background": "#fff8f5",
+        "headerText": "#ff6b57",
+        "decorHeader": "#e63f3f",
+        "sticker": "#ffd4c4",
+        "accent": "#ff8a7b",
+        "bodyBg": "linear-gradient(180deg, #fff8f5 0%, #fffbf9 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    },
+    "mint-dark": {
+      "name": "Mint Dark",
+      "description": "Sophisticated dark mint and teal",
+      "colors": {
+        "background": "#e8f7f4",
+        "headerText": "#00897b",
+        "decorHeader": "#004d47",
+        "sticker": "#b2f5f0",
+        "accent": "#00c9b7",
+        "bodyBg": "linear-gradient(180deg, #e8f7f4 0%, #f0fbf9 100%)"
+      },
+      "fonts": {
+        "header": "'Pacifico', cursive",
+        "body": "'Patrick Hand', system-ui, sans-serif"
+      }
+    }
+  }
+}
