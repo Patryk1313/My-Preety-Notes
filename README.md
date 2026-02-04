@@ -1,92 +1,62 @@
-# Aesthetic Notes — MVP v1
+# My Preety Notes — Aesthetic Notes (MVP)
 
-Local-run MVP that converts a `.docx` file into an aesthetic notebook-style HTML preview and PDF.
+Konwersja plików `.docx` do estetycznych, czytelnych PDF z podglądem HTML. Frontend (prosty edytor) + backend (upload, generowanie PDF). Minimalny landing został uproszczony — `index.html` zawiera tylko przycisk do edytora.
 
-Quick start
-
-1. Open a terminal in the project folder `aesthetic-notes`.
-2. Install dependencies:
+## Szybki start (pełny, z backendem)
+- W folderze projektu `aesthetic-notes`:
 
 ```bash
 npm install
-```
-
-3. Build Sass to CSS (or run this automatically when developing):
-
-```bash
 npm run build:sass
-```
-
-4. Start the server (dev mode recommended):
-
-```bash
 npm run dev
 ```
 
-5. Open http://localhost:3000 in your browser.
+- Otwórz: `http://localhost:3000/app.html` (edytor: upload, podgląd, generowanie PDF)
 
-- Landing page: `http://localhost:3000` (marketing / home)
-- Editor app: `http://localhost:3000/app.html` (upload and preview)
+## Tryb statyczny (tylko frontend)
+Jeśli chcesz zobaczyć sam interfejs bez backendu:
 
-Notes on implementation
-
-- Backend: Node.js + Express. Uses `multer` for uploads, `mammoth` to extract HTML from `.docx`, and `puppeteer` to render HTML → PDF.
-- Frontend: simple HTML UI that uploads a `.docx`, shows a live preview (returned HTML), and generates a PDF from the preview.
-- Styling: Sass source is in `src/scss/styles.scss`; compiled CSS is in `public/css/styles.css`.
-
-New features added:
-
-- Rich transformation rules: headings are converted to decorative headers, bold text becomes highlighted inline, lists get a hand-drawn style, and a decorative sticker is placed on the page.
-- Project save/load: use the `Save Project` button in the UI to persist the current preview (name + theme). Saved projects appear in the `Saved Projects` list and can be reloaded into the preview.
-
-Endpoints
-
-- `POST /upload` — upload a `.docx` and receive transformed HTML (preview-ready)
-- `POST /generate-pdf` — send `{"html": "<full html>"}` to receive a PDF
-- `POST /save-project` — save JSON `{ name, html, theme }`
-- `GET /projects` — list saved projects metadata
-- `GET /project/:id` — load a saved project
-
-Improvement suggestions for the formatting algorithm
-
-- Map Word heading styles (Heading 1/2/3) from `mammoth` output to large decorative headers.
-- Detect lists and convert bullets to handwritten-style bullet icons and spacing.
-- Use heuristics: sentences ending with `:` or short uppercase lines -> section headers.
-- Add token-based inline styling: lines starting with `-` or `*` → list items; `>>` → highlighted box.
-- Support user metadata in the document (special markers) to control stickers, colors, or layout.
-- Add a small rule-based doodle/sticker placer (randomized positions but deterministic per document hash).
-
-Theme System
-
-Themes are defined in `themes.json` (no code changes needed). To create a new theme:
-
-1. Open `themes.json`
-2. Add a new entry under `"themes"`:
-
-```json
-{
-  "myTheme": {
-    "name": "Theme Display Name",
-    "description": "Brief description",
-    "colors": {
-      "background": "#fffaf6",
-      "headerText": "#ff9fb0",
-      "decorHeader": "#ff7fa0",
-      "sticker": "#ffd6e0",
-      "accent": "#ffb86b",
-      "bodyBg": "linear-gradient(180deg, #f6f3ef 0%, #fff 100%)"
-    },
-    "fonts": {
-      "header": "'Pacifico', cursive",
-      "body": "'Patrick Hand', system-ui, sans-serif"
-    }
-  }
-}
+```bash
+npx --yes http-server public -p 8080
+# potem: http://localhost:8080/app.html
 ```
 
-3. Reload the app — your theme will appear in the Theme selector.
+Uwaga: w trybie statycznym nie działają endpointy: `upload`, `generate-pdf`, `projects`.
 
-Known caveats
+## Konfiguracja środowiska
+- Utwórz plik `.env` (opcjonalnie) z kluczem AI, aby włączyć projektowanie motywu przez Gemini:
 
-- Puppeteer downloads Chromium (large) during `npm install`; CI or headless environments may need extra setup.
-- This is an MVP. For production, sanitize inputs, set size limits, and manage temporary files.
+```
+GOOGLE_GEMINI_API_KEY=twoj_klucz
+```
+
+## Endpoints (backend)
+- `POST /upload` — wyślij `.docx`, zwraca przetworzony HTML (podgląd)
+- `POST /generate-pdf` — wyślij `{ html }`, zwraca PDF
+- `POST /save-project` — zapis projektu `{ name, html, theme }`
+- `GET /projects` — lista zapisanych projektów
+- `GET /project/:id` — pobierz konkretny projekt
+
+## Struktura projektu
+- `public/` — frontend (app.html, css, js, themes.json)
+- `src/scss/` — źródła Sass → kompilowane do `public/css/styles.css`
+- `server.js` — backend Express + `multer`, `mammoth`, `puppeteer`
+- `projects/` — zapisane projekty (JSON)
+- `uploads/` — przesłane pliki `.docx`
+
+## Znane uwagi
+- `puppeteer` pobiera Chromium podczas `npm install` (duży rozmiar).
+- Windows CRLF/LF: ostrzeżenia Git są normalne.
+- To MVP: dla produkcji dodaj walidację, limity i sprzątanie plików tymczasowych.
+
+## Skróty poleceń
+```bash
+# uruchom backend dev
+npm run dev
+
+# kompiluj Sass
+npm run build:sass
+
+# uruchom statyczny podgląd (tylko frontend)
+npx --yes http-server public -p 8080
+```
