@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Aesthetic Notes — Editor</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="editor-page">
+    <header class="editor-header">
+      <div class="editor-header-inner">
+        <div class="editor-brand">
+          <h1>✨ Aesthetic Notes</h1>
+          <p>Editor</p>
+        </div>
+        <nav class="editor-nav">
+          <a href="/" class="nav-back">← Home</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="editor-main">
+      <aside class="editor-sidebar">
+        <div class="editor-steps">
+          <!-- Step 1: Upload -->
+          <div class="step-card">
+            <div class="step-badge">1</div>
+            <h3>Upload Document</h3>
+            <p class="step-desc">Choose your .docx file</p>
+            
+            <form id="uploadForm" class="upload-form">
+              <div class="file-input-wrapper">
+                <input id="fileInput" name="docx" type="file" accept=".docx" />
+                <label for="fileInput" class="file-label">📎 Click or drop .docx</label>
+              </div>
+              <button id="uploadBtn" type="submit" class="btn btn-primary btn-block">Upload & Preview</button>
+            </form>
+
+            <div id="status" class="status-block status-info">
+              <span class="status-icon">📄</span>
+              <span class="status-text">No file uploaded</span>
+            </div>
+          </div>
+
+          <!-- Step 2: Customize -->
+          <div class="step-card">
+            <div class="step-badge">2</div>
+            <h3>Customize Style</h3>
+            <p class="step-desc">Choose your theme</p>
+            
+            <div class="highlight-colors" style="margin-bottom: 15px;">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600;">🖍️ Highlight Color:</label>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <div class="color-option" data-color="#fff0b3" style="background: #fff0b3;" title="Pastel Yellow"></div>
+                <div class="color-option" data-color="#ffcce0" style="background: #ffcce0;" title="Pastel Pink"></div>
+                <div class="color-option" data-color="#d4f0ff" style="background: #d4f0ff;" title="Pastel Blue"></div>
+                <div class="color-option" data-color="#d4ffcc" style="background: #d4ffcc;" title="Pastel Green"></div>
+                <div class="color-option" data-color="#ffe0cc" style="background: #ffe0cc;" title="Pastel Orange"></div>
+                <div class="color-option active" data-color="#f0d4ff" style="background: #f0d4ff;" title="Pastel Purple"></div>
+              </div>
+            </div>
+            
+            <button id="highlightBtn" type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;">
+              🖍️ Highlight Selected Text
+            </button>
+            
+            <div class="form-group">
+              <label for="themeSelect">🎨 Select Theme</label>
+              <select id="themeSelect" class="select-ctrl">
+                <option value="">Loading themes...</option>
+              </select>
+            </div>
+
+            <button id="randomThemeBtn" type="button" class="btn btn-primary btn-block" style="margin-top: 10px;">
+              🎲 Random Theme
+            </button>
+
+            <div class="theme-preview-row">
+              <div class="theme-dot" style="background: var(--theme-accent, #ffb86b);"></div>
+              <div class="theme-dot" style="background: var(--theme-header, #ff9fb0);"></div>
+              <div class="theme-dot" style="background: var(--theme-sticker, #ffd6e0);"></div>
+            </div>
+          </div>
+
+          <!-- Step 3: Export -->
+          <div class="step-card">
+            <div class="step-badge">3</div>
+            <h3>Export & Save</h3>
+            <p class="step-desc">Download or save your work</p>
+            
+            <div class="btn-group">
+              <button id="downloadPdfBtn" type="button" class="btn btn-secondary" disabled>📥 Download PDF</button>
+              <button id="saveProjectBtn" type="button" class="btn btn-success" disabled>💾 Save Project</button>
+            </div>
+          </div>
+
+          <!-- Projects Section -->
+          <div class="step-card projects-card">
+            <div class="step-badge">📁</div>
+            <h3>Saved Projects</h3>
+            <p class="step-desc">Your work in progress</p>
+            
+            <ul id="projectsList" class="projects-list"></ul>
+            <p class="projects-empty" style="display: none; color: #999; font-size: 13px; text-align: center;">No projects yet. Save one above! ⬆</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="editor-preview">
+        <div class="preview-header">
+          <h2>📄 Live Preview</h2>
+          <span id="previewStatus" class="preview-status">👇 Upload a file to begin</span>
+        </div>
+        <div class="preview-container">
+          <iframe id="previewFrame" sandbox="allow-scripts allow-same-origin" frameborder="0"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <!-- AI Loading Modal -->
+    <div id="aiLoadingModal" class="ai-modal" style="display: none;">
+      <div class="ai-modal-content" style="text-align: center; padding: 40px;">
+        <div style="font-size: 48px; margin-bottom: 20px; animation: spin 2s linear infinite;">⏳</div>
+        <h3>🤖 AI is analyzing your content...</h3>
+    </main>
+
+    <footer class="editor-footer">
+      <p>💡 Aesthetic Notes <span class="footer-divider">—</span> Transform boring notes into beautiful study guides</p>
+    </footer>
+
+    <script src="/theme-engine.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
