@@ -80,7 +80,7 @@ popupHighlightBtn?.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
   if (!restoreSelection()) return;
-  highlightBtn.click();
+  applyHighlightToSelection(true);
   hideSelectionPopup();
 });
 
@@ -88,7 +88,7 @@ popupUnderlineBtn?.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
   if (!restoreSelection()) return;
-  underlineBtn.click();
+  applyUnderlineToSelection(true);
   hideSelectionPopup();
 });
 
@@ -616,28 +616,28 @@ downloadPdfBtn.addEventListener('click', async () => {
   }
 });
 
-highlightBtn.addEventListener('click', () => {
+function applyHighlightToSelection(useStoredSelection = false) {
   if (!currentHtml) {
     alert('Upload a document first!');
-    return;
+    return false;
   }
-  
+
   try {
     const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-    const selectionData = getSelectionRange(iframeDoc);
+    const selectionData = useStoredSelection ? restoreSelection() : getSelectionRange(iframeDoc);
     if (!selectionData) {
       alert('Please select some text to highlight or remove highlight!');
-      return;
+      return false;
     }
     const { selection, range } = selectionData;
-    
+
     // Check if selected text is already in a mark element
     const container = range.commonAncestorContainer;
     const parentMark = findClosest(container, el => el.tagName === 'MARK' || el.classList.contains('user-highlight'));
-    
+
     if (parentMark) {
       unwrapElement(parentMark);
-      
+
       statusEl.innerHTML = `<span class="status-icon">✨</span><span class="status-text">Highlight removed!</span>`;
       statusEl.className = 'status-block status-success';
     } else {
@@ -648,7 +648,7 @@ highlightBtn.addEventListener('click', () => {
       mark.style.padding = '2px 6px';
       mark.style.borderRadius = '3px';
       mark.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
-      
+
       // Wrap selected content
       try {
         range.surroundContents(mark);
@@ -658,35 +658,40 @@ highlightBtn.addEventListener('click', () => {
         mark.appendChild(fragment);
         range.insertNode(mark);
       }
-      
+
       statusEl.innerHTML = `<span class="status-icon">🖍️</span><span class="status-text">Text highlighted!</span>`;
       statusEl.className = 'status-block status-success';
     }
-    
+
     // Clear selection
     selection.removeAllRanges();
-    
+
     // Update currentHtml to preserve highlights for PDF
     currentHtml = iframeDoc.documentElement.outerHTML;
-    
+    return true;
   } catch (err) {
     console.error('Highlight error:', err);
     alert('Could not modify highlight. Try selecting simpler text.');
+    return false;
   }
+}
+
+highlightBtn?.addEventListener('click', () => {
+  applyHighlightToSelection(false);
 });
 
-underlineBtn.addEventListener('click', () => {
+function applyUnderlineToSelection(useStoredSelection = false) {
   if (!currentHtml) {
     alert('Upload a document first!');
-    return;
+    return false;
   }
 
   try {
     const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-    const selectionData = getSelectionRange(iframeDoc);
+    const selectionData = useStoredSelection ? restoreSelection() : getSelectionRange(iframeDoc);
     if (!selectionData) {
       alert('Please select some text to underline or remove underline!');
-      return;
+      return false;
     }
     const { selection, range } = selectionData;
 
@@ -719,10 +724,16 @@ underlineBtn.addEventListener('click', () => {
 
     selection.removeAllRanges();
     currentHtml = iframeDoc.documentElement.outerHTML;
+    return true;
   } catch (err) {
     console.error('Underline error:', err);
     alert('Could not modify underline. Try selecting simpler text.');
+    return false;
   }
+}
+
+underlineBtn?.addEventListener('click', () => {
+  applyUnderlineToSelection(false);
 });
 
 function applyTextColorToSelection(useStoredSelection = false) {

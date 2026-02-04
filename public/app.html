@@ -12,9 +12,10 @@
       <div class="editor-header-inner">
         <a href="./" class="editor-brand">
           My Pretty Notes
+          <span class="brand-subtitle">Pro Editor</span>
         </a>
         <nav class="editor-nav">
-          <a href="./" class="nav-back">← Home</a>
+          <a href="./" class="nav-back">← Wróć do home</a>
         </nav>
       </div>
     </header>
@@ -25,28 +26,28 @@
           <!-- Step 1: Upload -->
           <div class="step-card">
             <div class="step-badge">1</div>
-            <h3>Upload Document</h3>
-            <p class="step-desc">Choose your .docx file</p>
+            <h3>Wgraj dokument</h3>
+            <p class="step-desc">Wybierz plik .docx</p>
             
             <form id="uploadForm" class="upload-form">
               <div class="file-input-wrapper">
                 <input id="fileInput" name="docx" type="file" accept=".docx" />
-                <label for="fileInput" class="file-label">📎 Click or drop .docx</label>
+                <label for="fileInput" class="file-label">📎 Kliknij lub upuść .docx</label>
               </div>
-              <button id="uploadBtn" type="submit" class="btn btn-primary btn-block">Upload & Preview</button>
+              <button id="uploadBtn" type="submit" class="btn btn-primary btn-block">Wgraj i podgląd</button>
             </form>
 
             <div id="status" class="status-block status-info">
               <span class="status-icon">📄</span>
-              <span class="status-text">No file uploaded</span>
+              <span class="status-text">Brak pliku</span>
             </div>
           </div>
 
           <!-- Step 2: Customize -->
           <div class="step-card">
             <div class="step-badge">2</div>
-            <h3>Customize Style</h3>
-            <p class="step-desc">Edit & style your text</p>
+            <h3>Dostosuj styl</h3>
+            <p class="step-desc">Edytuj i stylizuj tekst</p>
             
             <!-- Section 1: Text Highlighting -->
             <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px dashed rgba(232, 122, 91, 0.2);">
@@ -59,9 +60,6 @@
                 <div class="color-option" data-group="highlight" data-color="#d4ffcc" style="background: #d4ffcc;" title="Pastel Green"></div>
                 <div class="color-option" data-group="highlight" data-color="#ffe0cc" style="background: #ffe0cc;" title="Pastel Orange"></div>
               </div>
-              <button id="highlightBtn" type="button" class="btn btn-primary btn-block">
-                🖍️ Highlight Selected Text
-              </button>
             </div>
 
             <!-- Section 2: Text Underlining -->
@@ -75,9 +73,6 @@
                 <div class="color-option" data-group="underline" data-color="#ff7fa0" style="background: #ff7fa0;" title="Pink"></div>
                 <div class="color-option" data-group="underline" data-color="#ffcc66" style="background: #ffcc66;" title="Honey"></div>
               </div>
-              <button id="underlineBtn" type="button" class="btn btn-secondary btn-block">
-                ✏️ Underline Selected Text
-              </button>
             </div>
 
             <!-- Section 3: Remove Formatting -->
@@ -152,31 +147,31 @@
           <!-- Step 3: Export -->
           <div class="step-card">
             <div class="step-badge">3</div>
-            <h3>Export & Save</h3>
-            <p class="step-desc">Download or save your work</p>
+            <h3>Eksport i zapis</h3>
+            <p class="step-desc">Pobierz lub zapisz pracę</p>
             
             <div class="btn-group">
-              <button id="downloadPdfBtn" type="button" class="btn btn-secondary" disabled>📥 Download PDF</button>
-              <button id="saveProjectBtn" type="button" class="btn btn-success" disabled>💾 Save Project</button>
+              <button id="downloadPdfBtn" type="button" class="btn btn-secondary" disabled>📥 Pobierz PDF</button>
+              <button id="saveProjectBtn" type="button" class="btn btn-success" disabled>💾 Zapisz projekt</button>
             </div>
           </div>
 
           <!-- Projects Section -->
           <div class="step-card projects-card">
             <div class="step-badge">📁</div>
-            <h3>Saved Projects</h3>
-            <p class="step-desc">Your work in progress</p>
+            <h3>Moje projekty</h3>
+            <p class="step-desc">Prace w toku</p>
             
             <ul id="projectsList" class="projects-list"></ul>
-            <p class="projects-empty" style="display: none; color: #999; font-size: 13px; text-align: center;">No projects yet. Save one above! ⬆</p>
+            <p class="projects-empty" style="display: none; color: #999; font-size: 13px; text-align: center;">Brak projektów</p>
           </div>
         </div>
       </aside>
 
       <section class="editor-preview">
         <div class="preview-header">
-          <h2>📄 Live Preview</h2>
-          <span id="previewStatus" class="preview-status">👇 Upload a file to begin</span>
+          <h2>📄 Podgląd na żywo</h2>
+          <span id="previewStatus" class="preview-status">👇 Wgraj plik aby zacząć</span>
         </div>
         <div class="preview-container">
           <iframe id="previewFrame" sandbox="allow-scripts allow-same-origin" frameborder="0"></iframe>
@@ -208,11 +203,29 @@
         <h3>🤖 AI is analyzing your content...</h3>
     </main>
 
+    <!-- Floating Export Button -->
+    <button id="floatingExportBtn" class="floating-btn" title="Szybki eksport" style="display: none;">
+      ⬇️
+    </button>
+
     <footer class="editor-footer">
-      <p>💡 Aesthetic Notes <span class="footer-divider">—</span> Transform boring notes into beautiful study guides</p>
+      <p>💡 Aesthetic Notes <span class="footer-divider">—</span> Zmień nudne notatki w piękne przewodniki do nauki</p>
     </footer>
 
     <script src="./theme-engine.js"></script>
     <script src="./app.js"></script>
+    
+    <script>
+      // Floating Export Button
+      const floatingExportBtn = document.getElementById('floatingExportBtn');
+      if (floatingExportBtn) {
+        floatingExportBtn.addEventListener('click', function() {
+          const downloadBtn = document.getElementById('downloadPdfBtn');
+          if (downloadBtn && !downloadBtn.disabled) {
+            downloadBtn.click();
+          }
+        });
+      }
+    </script>
   </body>
 </html>
