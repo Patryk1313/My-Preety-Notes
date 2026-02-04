@@ -1,0 +1,14 @@
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Handmade notepad icon -->
+  <rect x="8" y="8" width="16" height="24" rx="1.5" fill="#e87a5b" opacity="0.8" stroke="#e87a5b" stroke-width="0.5"/>
+  
+  <!-- Handmade lines -->
+  <line x1="12" y1="14" x2="20" y2="14" stroke="#fffef9" stroke-width="1.2" opacity="0.85" stroke-linecap="round"/>
+  <line x1="12" y1="19" x2="20" y2="19" stroke="#fffef9" stroke-width="1.2" opacity="0.65" stroke-linecap="round"/>
+  <line x1="12" y1="24" x2="18" y2="24" stroke="#fffef9" stroke-width="1.2" opacity="0.65" stroke-linecap="round"/>
+  
+  <!-- Handmade text -->
+  <text x="32" y="28" font-family="'Caveat', cursive" font-size="22" font-weight="700" fill="#2b2420">
+    Pretty Notes
+  </text>
+</svg>

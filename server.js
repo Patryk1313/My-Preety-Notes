@@ -12,19 +12,70 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 let genAI = null;
 if (process.env.GOOGLE_GEMINI_API_KEY) {
   genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
 }
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-
 const projectsDir = path.join(__dirname, 'projects');
-if (!fs.existsSync(projectsDir)) fs.mkdirSync(projectsDir, { recursive: true });
+[uploadDir, projectsDir].forEach(dir => {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+});
+
+// Theme definitions - centralized
+const THEMES = [
+  {
+    id: "cherry-blossom",
+    name: "Soft Cherry Blossom",
+    colors: { primary: "#ffb3d9", secondary: "#ffc9e3", accent: "#ffe0f0", highlight: "#fff0f7", background: "#fffafc", text: "#5a3a4a" },
+    fonts: { header: "'Pacifico', cursive", body: "'Quicksand', sans-serif" }
+  },
+  {
+    id: "lavender",
+    name: "Lavender Dreams",
+    colors: { primary: "#d4b5f0", secondary: "#e6d4ff", accent: "#f0e6ff", highlight: "#f5f0ff", background: "#fdfbff", text: "#4a3a5a" },
+    fonts: { header: "'Poppins', sans-serif", body: "'Nunito', sans-serif" }
+  },
+  {
+    id: "mint",
+    name: "Mint Breeze",
+    colors: { primary: "#b3f0d4", secondary: "#c9ffe6", accent: "#e0fff0", highlight: "#f0fff7", background: "#fafffc", text: "#3a5a4a" },
+    fonts: { header: "'Raleway', sans-serif", body: "'Quicksand', sans-serif" }
+  },
+  {
+    id: "peach",
+    name: "Peach Sunset",
+    colors: { primary: "#ffc9b3", secondary: "#ffe0d4", accent: "#fff0e6", highlight: "#fff7f0", background: "#fffcfa", text: "#5a4a3a" },
+    fonts: { header: "'Patrick Hand', cursive", body: "'Nunito', sans-serif" }
+  },
+  {
+    id: "blue",
+    name: "Baby Blue Sky",
+    colors: { primary: "#b3d9ff", secondary: "#d4e6ff", accent: "#e6f0ff", highlight: "#f0f7ff", background: "#fafcff", text: "#3a4a5a" },
+    fonts: { header: "'Playfair Display', serif", body: "'Raleway', sans-serif" }
+  },
+  {
+    id: "lemon",
+    name: "Lemon Cream",
+    colors: { primary: "#fff0b3", secondary: "#fff7d4", accent: "#fffce6", highlight: "#fffef0", background: "#fffffa", text: "#5a5a3a" },
+    fonts: { header: "'Poppins', sans-serif", body: "'Quicksand', sans-serif" }
+  },
+  {
+    id: "rose",
+    name: "Rose Quartz",
+    colors: { primary: "#ffcce0", secondary: "#ffe0eb", accent: "#fff0f5", highlight: "#fff7fa", background: "#fffcfd", text: "#5a3a45" },
+    fonts: { header: "'Pacifico', cursive", body: "'Patrick Hand', cursive" }
+  },
+  {
+    id: "lilac",
+    name: "Lilac Whisper",
+    colors: { primary: "#e6ccff", secondary: "#f0e0ff", accent: "#f7f0ff", highlight: "#fbf7ff", background: "#fefcff", text: "#4a3a5a" },
+    fonts: { header: "'Raleway', sans-serif", body: "'Nunito', sans-serif" }
+  }
+];
 
 const storage = multer.diskStorage({
   destination: uploadDir,
@@ -32,7 +83,20 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   }
 });
-const upload = multer({ storage });
+
+const upload = multer({ 
+  storage,
+  limits: { 
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      cb(null, true);
+    } else {
+      cb(new Error('Only .docx files are allowed'));
+    }
+  }
+});
 
 app.post('/upload', upload.single('docx'), async (req, res) => {
   try {
@@ -70,9 +134,11 @@ CRITICAL ANALYSIS - Identify:
 
 CREATE PERFECT PASTEL DESIGN:
 - Soft pastel colors ONLY (no gradients!)
-- Beautiful readable fonts
+- Use a HANDWRITING/handmade font for body text (e.g., Patrick Hand, Caveat, Handlee)
+- Use a decorative header font (e.g., Pacifico)
 - Perfect spacing and hierarchy
 - Clear visual distinction between elements
+- Add a subtle "notebook lines" background effect
 
 Return ONLY this JSON:
 {
@@ -87,8 +153,8 @@ Return ONLY this JSON:
       "text": "#soft dark color"
     },
     "fonts": {
-      "header": "'Beautiful Font', serif/sans-serif",
-      "body": "'Readable Font', sans-serif"
+      "header": "'Beautiful Decorative Font', cursive",
+      "body": "'Handwriting Font', cursive"
     }
   },
   "structure": {
@@ -120,9 +186,20 @@ ${textContent.substring(0, 3000)}`;
             } = themeData.colors || {};
             
             const headerFont = themeData.fonts?.header || "'Pacifico', cursive";
-            const bodyFont = themeData.fonts?.body || "'Quicksand', sans-serif";
+            const defaultHandwritingFont = "'Patrick Hand', 'Caveat', 'Handlee', cursive";
+            const bodyFontCandidate = themeData.fonts?.body || defaultHandwritingFont;
+            const bodyFont = /(patrick hand|caveat|handlee|handwriting|cursive)/i.test(bodyFontCandidate)
+              ? bodyFontCandidate
+              : defaultHandwritingFont;
             
-            const fontImports = `@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&family=Poppins:wght@400;600;700&family=Patrick+Hand&family=Raleway:wght@400;700&family=Nunito:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');`;
+            const pastelColors = [
+              '#fff0f7', '#f0d4ff', '#fff0b3', '#ffcce0', '#d4f0ff', 
+              '#d4ffcc', '#ffe0cc', '#e6f7ff', '#fff5e6', '#fce4ec',
+              '#f3e5f5', '#e0f7fa', '#f1f8e9', '#fff3e0', '#fbe9e7'
+            ];
+            const randomAiHighlight = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+            
+            const fontImports = `@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Patrick+Hand&family=Caveat:wght@400;600;700&family=Handlee&family=Quicksand:wght@400;600;700&family=Poppins:wght@400;600;700&family=Raleway:wght@400;700&family=Nunito:wght@400;600&family=Playfair+Display:wght@400;700&display=swap');`;
             
             dynamicCss = `
               ${fontImports}
@@ -138,17 +215,39 @@ ${textContent.substring(0, 3000)}`;
                 line-height: 1.8;
                 background: ${background};
                 margin: 0;
-                padding: 20px;
+                padding: 0;
               }
               
               .note-page {
-                max-width: 900px;
-                margin: 0 auto;
+                max-width: 100%;
+                width: 100%;
+                margin: 0;
                 background: white;
-                padding: 40px;
-                border-radius: 12px;
-                box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+                padding: 30px 40px;
+                border-radius: 0;
+                box-shadow: none;
                 position: relative;
+                overflow: hidden;
+              }
+
+              .note-page::before {
+                content: "";
+                position: absolute;
+                inset: 40px;
+                pointer-events: none;
+                background-image: repeating-linear-gradient(
+                  to bottom,
+                  rgba(0, 0, 0, 0.08) 0px,
+                  rgba(0, 0, 0, 0.08) 1px,
+                  transparent 1px,
+                  transparent 32px
+                );
+                opacity: 0.25;
+              }
+
+              .note-content {
+                position: relative;
+                z-index: 1;
               }
               
               h1, h2, h3, h4, h5, h6 {
@@ -185,7 +284,7 @@ ${textContent.substring(0, 3000)}`;
               }
               
               .ai-highlight {
-                background: ${highlight};
+                background: ${randomAiHighlight};
                 padding: 3px 7px;
                 border-radius: 4px;
                 font-weight: 700;
@@ -270,16 +369,17 @@ ${textContent.substring(0, 3000)}`;
               dynamicHtml = highlightedHtml;
             }
           }
-        } catch (parseErr) {
-          console.log('Design JSON parse error, using default styling');
-        }
-      } catch (aiErr) {
-        console.log('AI design skipped:', aiErr.message);
-      }
+        } catch (parseErr) {}
+      } catch (aiErr) {}
     }
     
     const transformed = transformHtmlWithPerfectCss(dynamicHtml, dynamicCss);
     const full = wrapHtmlFragment(transformed, dynamicCss);
+    
+    // Delete uploaded file after conversion
+    if (req.file && req.file.path) {
+      fs.unlinkSync(req.file.path);
+    }
     
     res.json({ 
       html: full,
@@ -287,6 +387,10 @@ ${textContent.substring(0, 3000)}`;
     });
   } catch (e) {
     console.error(e);
+    // Clean up file on error too
+    if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
     res.status(500).json({ error: e.message });
   }
 });
@@ -294,11 +398,9 @@ ${textContent.substring(0, 3000)}`;
 function transformHtmlWithPerfectCss(inputHtml, customCss) {
   let out = inputHtml;
   
-  // Usuwanie podkreśleń - remove <u> tags
   out = out.replace(/<u>/gi, '');
   out = out.replace(/<\/u>/gi, '');
   
-  // Usuwanie text-decoration z style atrybutów
   out = out.replace(/style="([^"]*)"/gi, (match, styleContent) => {
     const cleaned = styleContent.replace(/text-decoration:\s*[^;]*;?/gi, '').trim();
     return cleaned ? `style="${cleaned}"` : '';
@@ -324,6 +426,9 @@ function wrapHtmlFragment(fragment, dynamicCss = '') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Patrick+Hand&family=Caveat:wght@400;600;700&family=Handlee&family=Quicksand:wght@400;600;700&family=Poppins:wght@400;600;700&family=Raleway:wght@400;700&family=Nunito:wght@400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { scrollbar-width: none; -ms-overflow-style: none; }
     *::-webkit-scrollbar { display: none; }
@@ -351,55 +456,19 @@ app.post('/save-project', async (req, res) => {
   }
 });
 
+app.get('/themes', (req, res) => {
+  res.json({ themes: THEMES });
+});
+
+app.get('/theme/:id', (req, res) => {
+  const theme = THEMES.find(t => t.id === req.params.id);
+  if (!theme) return res.status(404).json({ error: 'Theme not found' });
+  res.json(theme);
+});
+
 app.get('/random-theme', (req, res) => {
-  try {
-    const themes = [
-      {
-        name: "Soft Cherry Blossom",
-        colors: { primary: "#ffb3d9", secondary: "#ffc9e3", accent: "#ffe0f0", highlight: "#fff0f7", background: "#fffafc", text: "#5a3a4a" },
-        fonts: { header: "'Pacifico', cursive", body: "'Quicksand', sans-serif" }
-      },
-      {
-        name: "Lavender Dreams",
-        colors: { primary: "#d4b5f0", secondary: "#e6d4ff", accent: "#f0e6ff", highlight: "#f5f0ff", background: "#fdfbff", text: "#4a3a5a" },
-        fonts: { header: "'Poppins', sans-serif", body: "'Nunito', sans-serif" }
-      },
-      {
-        name: "Mint Breeze",
-        colors: { primary: "#b3f0d4", secondary: "#c9ffe6", accent: "#e0fff0", highlight: "#f0fff7", background: "#fafffc", text: "#3a5a4a" },
-        fonts: { header: "'Raleway', sans-serif", body: "'Quicksand', sans-serif" }
-      },
-      {
-        name: "Peach Sunset",
-        colors: { primary: "#ffc9b3", secondary: "#ffe0d4", accent: "#fff0e6", highlight: "#fff7f0", background: "#fffcfa", text: "#5a4a3a" },
-        fonts: { header: "'Patrick Hand', cursive", body: "'Nunito', sans-serif" }
-      },
-      {
-        name: "Baby Blue Sky",
-        colors: { primary: "#b3d9ff", secondary: "#d4e6ff", accent: "#e6f0ff", highlight: "#f0f7ff", background: "#fafcff", text: "#3a4a5a" },
-        fonts: { header: "'Playfair Display', serif", body: "'Raleway', sans-serif" }
-      },
-      {
-        name: "Lemon Cream",
-        colors: { primary: "#fff0b3", secondary: "#fff7d4", accent: "#fffce6", highlight: "#fffef0", background: "#fffffa", text: "#5a5a3a" },
-        fonts: { header: "'Poppins', sans-serif", body: "'Quicksand', sans-serif" }
-      },
-      {
-        name: "Rose Quartz",
-        colors: { primary: "#ffcce0", secondary: "#ffe0eb", accent: "#fff0f5", highlight: "#fff7fa", background: "#fffcfd", text: "#5a3a45" },
-        fonts: { header: "'Pacifico', cursive", body: "'Patrick Hand', cursive" }
-      },
-      {
-        name: "Lilac Whisper",
-        colors: { primary: "#e6ccff", secondary: "#f0e0ff", accent: "#f7f0ff", highlight: "#fbf7ff", background: "#fefcff", text: "#4a3a5a" },
-        fonts: { header: "'Raleway', sans-serif", body: "'Nunito', sans-serif" }
-      }
-    ];
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-    res.json(randomTheme);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
+  const randomTheme = THEMES[Math.floor(Math.random() * THEMES.length)];
+  res.json(randomTheme);
 });
 
 app.get('/projects', (req, res) => {
@@ -423,6 +492,16 @@ app.get('/project/:id', (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+app.delete('/project/:id', (req, res) => {
+  try {
+    const id = req.params.id;
+    const filePath = path.join(projectsDir, `${id}.json`);
+    if (!fs.existsSync(filePath)) return res.status(404).json({ error: 'Not found' });
+    fs.unlinkSync(filePath);
+    res.json({ ok: true, message: 'Project deleted' });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 app.post('/generate-pdf', async (req, res) => {
   let browser;
   try {
@@ -430,8 +509,18 @@ app.post('/generate-pdf', async (req, res) => {
     if (!html) return res.status(400).json({ error: 'No HTML provided' });
     browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'load', timeout: 30000 });
-    const pdf = await page.pdf({ format: 'A4', printBackground: true, margin: { top: '15mm', bottom: '15mm', left: '15mm', right: '15mm' } });
+    
+    await page.setViewport({ width: 794, height: 1123, deviceScaleFactor: 1 });
+    await page.setContent(html, { waitUntil: 'networkidle0', timeout: 30000 });
+    await page.evaluateHandle('document.fonts.ready');
+    await page.waitForTimeout(2000);
+    
+    const pdf = await page.pdf({ 
+      format: 'A4', 
+      printBackground: true,
+      margin: { top: '10mm', bottom: '10mm', left: '10mm', right: '10mm' },
+      scale: 1.0
+    });
     res.set({ 'Content-Type': 'application/pdf', 'Content-Disposition': 'attachment; filename="aesthetic-notes.pdf"' });
     res.send(pdf);
   } catch (e) {
@@ -440,6 +529,21 @@ app.post('/generate-pdf', async (req, res) => {
   } finally {
     if (browser) await browser.close();
   }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ error: 'File too large. Maximum size is 10MB.' });
+    }
+    return res.status(400).json({ error: err.message });
+  }
+  if (err.message === 'Only .docx files are allowed') {
+    return res.status(400).json({ error: err.message });
+  }
+  console.error('Server error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 const PORT = process.env.PORT || 3000;

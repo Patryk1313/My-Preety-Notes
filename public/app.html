@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Aesthetic Notes — Editor</title>
     <link rel="stylesheet" href="./css/styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="editor-page">
     <header class="editor-header">
       <div class="editor-header-inner">
-        <div class="editor-brand">
-          <h1>✨ Aesthetic Notes</h1>
-          <p>Editor</p>
-        </div>
+        <a href="./" class="editor-brand">
+          My Pretty Notes
+        </a>
         <nav class="editor-nav">
           <a href="./" class="nav-back">← Home</a>
         </nav>
@@ -47,39 +46,106 @@
           <div class="step-card">
             <div class="step-badge">2</div>
             <h3>Customize Style</h3>
-            <p class="step-desc">Choose your theme</p>
+            <p class="step-desc">Edit & style your text</p>
             
-            <div class="highlight-colors" style="margin-bottom: 15px;">
-              <label style="display: block; margin-bottom: 8px; font-weight: 600;">🖍️ Highlight Color:</label>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <div class="color-option" data-color="#fff0b3" style="background: #fff0b3;" title="Pastel Yellow"></div>
-                <div class="color-option" data-color="#ffcce0" style="background: #ffcce0;" title="Pastel Pink"></div>
-                <div class="color-option" data-color="#d4f0ff" style="background: #d4f0ff;" title="Pastel Blue"></div>
-                <div class="color-option" data-color="#d4ffcc" style="background: #d4ffcc;" title="Pastel Green"></div>
-                <div class="color-option" data-color="#ffe0cc" style="background: #ffe0cc;" title="Pastel Orange"></div>
-                <div class="color-option active" data-color="#f0d4ff" style="background: #f0d4ff;" title="Pastel Purple"></div>
+            <!-- Section 1: Text Highlighting -->
+            <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px dashed rgba(232, 122, 91, 0.2);">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px;">🖍️ Highlight Color</label>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+                <div class="color-option active" data-group="highlight" data-color="#f0d4ff" style="background: #f0d4ff;" title="Pastel Purple"></div>
+                <div class="color-option" data-group="highlight" data-color="#fff0b3" style="background: #fff0b3;" title="Pastel Yellow"></div>
+                <div class="color-option" data-group="highlight" data-color="#ffcce0" style="background: #ffcce0;" title="Pastel Pink"></div>
+                <div class="color-option" data-group="highlight" data-color="#d4f0ff" style="background: #d4f0ff;" title="Pastel Blue"></div>
+                <div class="color-option" data-group="highlight" data-color="#d4ffcc" style="background: #d4ffcc;" title="Pastel Green"></div>
+                <div class="color-option" data-group="highlight" data-color="#ffe0cc" style="background: #ffe0cc;" title="Pastel Orange"></div>
               </div>
-            </div>
-            
-            <button id="highlightBtn" type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px;">
-              🖍️ Highlight Selected Text
-            </button>
-            
-            <div class="form-group">
-              <label for="themeSelect">🎨 Select Theme</label>
-              <select id="themeSelect" class="select-ctrl">
-                <option value="">Loading themes...</option>
-              </select>
+              <button id="highlightBtn" type="button" class="btn btn-primary btn-block">
+                🖍️ Highlight Selected Text
+              </button>
             </div>
 
-            <button id="randomThemeBtn" type="button" class="btn btn-primary btn-block" style="margin-top: 10px;">
-              🎲 Random Theme
-            </button>
+            <!-- Section 2: Text Underlining -->
+            <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px dashed rgba(232, 122, 91, 0.2);">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px;">✏️ Underline Color</label>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+                <div class="color-option active" data-group="underline" data-color="#ff9fb0" style="background: #ff9fb0;" title="Rose"></div>
+                <div class="color-option" data-group="underline" data-color="#ffb86b" style="background: #ffb86b;" title="Peach"></div>
+                <div class="color-option" data-group="underline" data-color="#52c9b3" style="background: #52c9b3;" title="Mint"></div>
+                <div class="color-option" data-group="underline" data-color="#7f7fff" style="background: #7f7fff;" title="Lavender"></div>
+                <div class="color-option" data-group="underline" data-color="#ff7fa0" style="background: #ff7fa0;" title="Pink"></div>
+                <div class="color-option" data-group="underline" data-color="#ffcc66" style="background: #ffcc66;" title="Honey"></div>
+              </div>
+              <button id="underlineBtn" type="button" class="btn btn-secondary btn-block">
+                ✏️ Underline Selected Text
+              </button>
+            </div>
 
-            <div class="theme-preview-row">
-              <div class="theme-dot" style="background: var(--theme-accent, #ffb86b);"></div>
-              <div class="theme-dot" style="background: var(--theme-header, #ff9fb0);"></div>
-              <div class="theme-dot" style="background: var(--theme-sticker, #ffd6e0);"></div>
+            <!-- Section 3: Remove Formatting -->
+            <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px dashed rgba(232, 122, 91, 0.2);">
+              <button id="removeMarkupBtn" type="button" class="btn btn-secondary btn-block">
+                🧼 Remove Highlight/Underline
+              </button>
+            </div>
+            
+            <!-- Section 4: Text Styling -->
+            <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px dashed rgba(232, 122, 91, 0.2);">
+              <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 13px;">⚙️ Text Styling</label>
+              
+              <div style="margin-bottom: 10px;">
+                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 6px;">
+                  <span>Font Size:</span>
+                  <span id="fontSizeValue" style="font-weight: 600;">120%</span>
+                </label>
+                <input type="range" id="fontSizeSlider" min="80" max="120" value="120" style="width: 100%; cursor: pointer;">
+              </div>
+
+              <div style="margin-bottom: 10px;">
+                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 6px;">
+                  <span>Line Spacing:</span>
+                  <span id="lineSpacingValue" style="font-weight: 600;">1</span>
+                </label>
+                <input type="range" id="lineSpacingSlider" min="1" max="2.5" step="0.1" value="1" style="width: 100%; cursor: pointer;">
+              </div>
+
+              <div style="margin-bottom: 10px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+                  <span style="flex: 1;">Bold Color:</span>
+                  <input type="color" id="boldTextColor" class="color-input" value="#FFF9C4" style="width: 50px; height: 36px; border: 1.5px solid rgba(232, 122, 91, 0.15); border-radius: 4px; cursor: pointer;">
+                </label>
+              </div>
+
+              <div style="margin-bottom: 10px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+                  <span style="flex: 1;">AI Highlight:</span>
+                  <input type="color" id="aiHighlightColor" class="color-input" value="#fff0f7" style="width: 50px; height: 36px; border: 1.5px solid rgba(232, 122, 91, 0.15); border-radius: 4px; cursor: pointer;">
+                </label>
+              </div>
+
+              <div style="margin-bottom: 10px;">
+                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 6px;">
+                  <span>Highlight Shadow:</span>
+                  <span id="shadowValue" style="font-weight: 600;">0px</span>
+                </label>
+                <input type="range" id="shadowSlider" min="0" max="8" step="0.5" value="0" style="width: 100%; cursor: pointer;">
+              </div>
+
+              <button id="applyStylesBtn" type="button" class="btn btn-primary btn-block">
+                ✓ Apply Text Styles
+              </button>
+            </div>
+            
+            <!-- Section 5: Theme Selection -->
+            <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px dashed rgba(232, 122, 91, 0.2);">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px;">🎨 Select Theme</label>
+              <div class="form-group" style="margin-bottom: 0;">
+                <select id="themeSelect" class="select-ctrl">
+                  <option value="">Loading themes...</option>
+                </select>
+              </div>
+
+              <button id="randomThemeBtn" type="button" class="btn btn-primary btn-block" style="margin-top: 8px;">
+                🎲 Random Theme
+              </button>
             </div>
           </div>
 
@@ -117,6 +183,23 @@
         </div>
       </section>
     </main>
+
+    <!-- Selection Customization Popup -->
+    <div id="selectionPopup" style="display: none; position: fixed; z-index: 9999; background: #fff; border: 1.5px dashed rgba(232, 122, 91, 0.35); box-shadow: 0 6px 18px rgba(0,0,0,0.08); border-radius: 10px; padding: 10px 12px; font-family: 'Inter', system-ui, sans-serif; font-size: 12px;">
+      <div style="font-weight: 600; margin-bottom: 6px;">✨ Customize Selection</div>
+      <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+        <button id="popupHighlightBtn" type="button" title="Highlight" style="background: #ffeef6; border: 1px solid #f3c6d8; border-radius: 6px; padding: 4px 6px; cursor: pointer;">🖍️</button>
+        <button id="popupUnderlineBtn" type="button" title="Underline" style="background: #fff7e6; border: 1px solid #f5d2a0; border-radius: 6px; padding: 4px 6px; cursor: pointer;">✏️</button>
+        <button id="popupBoldBtn" type="button" title="Bold" style="background: #fff9dc; border: 1px solid #f0e1a6; border-radius: 6px; padding: 4px 6px; cursor: pointer;">🅱️</button>
+        <button id="popupBiggerBtn" type="button" title="Bigger text" style="background: #eef7ff; border: 1px solid #cfe3ff; border-radius: 6px; padding: 4px 6px; cursor: pointer;">A+</button>
+        <button id="popupSmallerBtn" type="button" title="Smaller text" style="background: #eef7ff; border: 1px solid #cfe3ff; border-radius: 6px; padding: 4px 6px; cursor: pointer;">A-</button>
+        <button id="popupRemoveBtn" type="button" title="Remove highlight/underline" style="background: #f4f4f4; border: 1px solid #e0e0e0; border-radius: 6px; padding: 4px 6px; cursor: pointer;">🧼</button>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <input type="color" id="popupTextColorPicker" value="#5a3a4a" title="Text color" style="width: 34px; height: 28px; border: 1px solid #eee; border-radius: 6px; cursor: pointer;">
+        <button id="popupTextColorBtn" type="button" title="Apply text color" style="background: #eaf4ff; border: 1px solid #cfe3ff; border-radius: 6px; padding: 4px 8px; cursor: pointer;">🎨 Color</button>
+      </div>
+    </div>
 
     <!-- AI Loading Modal -->
     <div id="aiLoadingModal" class="ai-modal" style="display: none;">

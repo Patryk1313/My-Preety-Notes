@@ -1,0 +1,6 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Three color theme circles -->
+  <circle cx="80" cy="120" r="30" fill="#e87a5b"/>
+  <circle cx="120" cy="120" r="30" fill="#f2b880"/>
+  <circle cx="160" cy="120" r="30" fill="#fef5e7" stroke="#2b2420" stroke-width="1"/>
+</svg>

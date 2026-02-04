@@ -1,53 +1,88 @@
-# My Preety Notes — Aesthetic Notes (MVP)
+# Aesthetic Notes — Beautiful Study Notes Generator
 
-Konwersja plików `.docx` do estetycznych, czytelnych PDF z podglądem HTML. Frontend (prosty edytor) + backend (upload, generowanie PDF). Minimalny landing został uproszczony — `index.html` zawiera tylko przycisk do edytora.
+Transform boring `.docx` documents into beautiful, aesthetic PDF notes with AI-powered theme generation.
 
-## Szybki start (pełny, z backendem)
-- W folderze projektu `aesthetic-notes`:
+## ✨ Features
+
+- 📄 Upload `.docx` files and convert to beautiful HTML
+- 🎨 8 preset aesthetic themes + AI-generated custom themes
+- 🖍️ Interactive text highlighting and underlining
+- 📱 Live preview with customizable styling
+- 💾 Save and manage projects
+- 📥 Export to PDF with perfect formatting
+- 🤖 AI-powered keyword highlighting (Google Gemini)
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
 npm install
 npm run build:sass
-npm run dev
+npm start
 ```
 
-- Otwórz: `http://localhost:3000/app.html` (edytor: upload, podgląd, generowanie PDF)
+Visit: `http://localhost:3000`
 
-## Tryb statyczny (tylko frontend)
-Jeśli chcesz zobaczyć sam interfejs bez backendu:
+### Environment Setup
 
-```bash
-npx --yes http-server public -p 8080
-# potem: http://localhost:8080/app.html
+Create a `.env` file (copy from `.env.example`):
+
+```env
+GOOGLE_GEMINI_API_KEY=your_api_key_here
+PORT=3000
 ```
 
-Uwaga: w trybie statycznym nie działają endpointy: `upload`, `generate-pdf`, `projects`.
+**Note:** The app works without Gemini API, but AI theme generation will be disabled.
 
-## Konfiguracja środowiska
-- Utwórz plik `.env` (opcjonalnie) z kluczem AI, aby włączyć projektowanie motywu przez Gemini:
+## 📦 Deployment Checklist
+
+Before deploying to production:
+
+1. ✅ Set `GOOGLE_GEMINI_API_KEY` in hosting environment variables
+2. ✅ Set `PORT` variable (or use hosting default)
+3. ✅ Run `npm run build:sass` to compile CSS
+4. ✅ Ensure `uploads/` and `projects/` folders are writable
+5. ✅ Configure max upload size on your hosting
+
+## 🛠️ Tech Stack
+
+- **Backend:** Node.js, Express
+- **Document Processing:** Mammoth.js (docx → HTML)
+- **PDF Generation:** Puppeteer
+- **AI:** Google Gemini API
+- **Frontend:** Vanilla JS, Sass
+
+## 📁 Project Structure
 
 ```
-GOOGLE_GEMINI_API_KEY=twoj_klucz
+aesthetic-notes/
+├── public/          # Frontend files
+│   ├── app.html     # Main editor
+│   ├── app.js       # Editor logic
+│   ├── css/         # Compiled styles
+│   └── js/          # Landing page
+├── src/scss/        # Sass source files
+├── server.js        # Express backend
+├── projects/        # Saved projects (JSON)
+├── uploads/         # Temporary file storage
+└── .env.example     # Environment template
 ```
 
-## Endpoints (backend)
-- `POST /upload` — wyślij `.docx`, zwraca przetworzony HTML (podgląd)
-- `POST /generate-pdf` — wyślij `{ html }`, zwraca PDF
-- `POST /save-project` — zapis projektu `{ name, html, theme }`
-- `GET /projects` — lista zapisanych projektów
-- `GET /project/:id` — pobierz konkretny projekt
+## 🌐 API Endpoints
 
-## Struktura projektu
-- `public/` — frontend (app.html, css, js, themes.json)
-- `src/scss/` — źródła Sass → kompilowane do `public/css/styles.css`
-- `server.js` — backend Express + `multer`, `mammoth`, `puppeteer`
-- `projects/` — zapisane projekty (JSON)
-- `uploads/` — przesłane pliki `.docx`
+- `POST /upload` — Upload .docx, returns HTML preview
+- `POST /generate-pdf` — Convert HTML to PDF
+- `POST /save-project` — Save project with theme
+- `GET /projects` — List all saved projects
+- `GET /project/:id` — Get specific project
+- `DELETE /project/:id` — Delete project
+- `GET /themes` — Get all available themes
+- `GET /random-theme` — Get random theme
 
-## Znane uwagi
-- `puppeteer` pobiera Chromium podczas `npm install` (duży rozmiar).
-- Windows CRLF/LF: ostrzeżenia Git są normalne.
-- To MVP: dla produkcji dodaj walidację, limity i sprzątanie plików tymczasowych.
+## 📝 License
+
+MIT
 
 ## Skróty poleceń
 ```bash

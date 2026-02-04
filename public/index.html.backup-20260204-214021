@@ -15,6 +15,7 @@
       My Pretty Notes
     </a>
     <div class="nav-links">
+      <a href="#features">Funkcje</a>
       <a href="#how">Jak działa</a>
       <a href="#pricing">Plany</a>
       <a href="#reviews">Opinie</a>
@@ -123,73 +124,6 @@
     <p class="hero-note">💡 Free bez rejestracji • Działa w przeglądarce • Premium odblokowuje więcej</p>
   </section>
 
-  <!-- Transformation Section -->
-  <section class="transformation-section">
-    <div class="transformation-wrapper">
-      <!-- Left Side - Text Content -->
-      <div class="transformation-text">
-        <p class="section-eyebrow">✨ Transformacja</p>
-        <h2 class="transformation-title">
-          Od zwykłego dokumentu<br>
-          do <span class="highlight">pięknej notatki</span>
-        </h2>
-        <p class="transformation-desc">
-          Upload dokumentu .docx, wybór motywu i gotowe — Twoja notatka wygląda profesjonalnie. 
-          Bez skomplikowanych narzędzi, bez nauki designu. Po prostu działa.
-        </p>
-        <div class="transformation-cta">
-
-        </div>
-      </div>
-
-      <!-- Right Side - Floating Note Cards -->
-      <div class="transformation-mockups">
-        <!-- Before Note Card -->
-        <div class="note-mockup before-note">
-          <div class="note-mockup-header">
-            <div class="note-status">
-              <span class="status-dot"></span>
-              <span class="status-text">Przed</span>
-            </div>
-          </div>
-          <div class="note-preview">
-            <img src="./images/landing/note-before.png" alt="Notatka przed stylowaniem" class="note-image">
-          </div>
-          <div class="note-footer">
-            <span class="note-label">Zwykły dokument</span>
-          </div>
-        </div>
-
-        <!-- After Note Card -->
-        <div class="note-mockup after-note">
-          <div class="note-mockup-header">
-            <div class="note-status premium">
-              <span class="status-dot"></span>
-              <span class="status-text">Po stylowaniu</span>
-            </div>
-            <span class="note-badge">✨</span>
-          </div>
-          <div class="note-preview">
-            <img src="./images/landing/note-after.png" alt="Notatka po stylowaniu" class="note-image">
-          </div>
-          <div class="note-footer premium-footer">
-            <span class="note-label">Piękna notatka</span>
-            <span class="note-tag">Premium</span>
-          </div>
-        </div>
-
-        <!-- Floating Stats Badge -->
-        <div class="floating-stats-badge">
-          <div class="badge-icon">🎨</div>
-          <div class="badge-content">
-            <span class="badge-number">28</span>
-            <span class="badge-text">Motywów</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Editor Tools Showcase Section -->
   <section class="editor-showcase">
     <div class="editor-showcase-content">
@@ -209,6 +143,7 @@
           <li><span class="highlight-dot"></span>Kolorowanie i formatowanie</li>
           <li><span class="highlight-dot"></span>Eksport PDF</li>
         </ul>
+        <a href="./app.html" class="btn-primary">Odkryj wszystkie narzędzia</a>
       </div>
 
       <div class="editor-image-container">
@@ -224,110 +159,6 @@
 
 
 
-
-  <!-- How it works timeline -->
-  <section id="how" class="timeline-section">
-    <div class="timeline-header">
-      <p class="eyebrow">Jak to działa</p>
-      <h2>Trzy proste kroki do pięknych notatek</h2>
-      <p class="timeline-subtitle">
-        Nie potrzebujesz instrukcji ani szkoleń. Po prostu otwórz edytor 
-        i zacznij pisać — reszta dzieje się automatycznie.
-      </p>
-    </div>
-
-    <div class="timeline-container">
-      <!-- Timeline line -->
-      <div class="timeline-line"></div>
-
-      <!-- Step 1 -->
-      <div class="timeline-item">
-        <div class="timeline-badge">KROK 01</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content left">
-          <div class="timeline-card">
-            <!-- Theme Selector Mockup -->
-            <div class="timeline-mockup theme-selector">
-              <div class="mockup-icon">🎨</div>
-              <h4 class="mockup-title">Select Theme</h4>
-              <select class="theme-dropdown">
-                <option>Select a theme...</option>
-                <option selected>Sunset</option>
-                <option>Purple Dream</option>
-                <option>Ocean Blue</option>
-              </select>
-              <button class="random-theme-btn">🎲 Random Theme</button>
-            </div>
-            <h3 class="timeline-title">Wybierz motyw, który Ci się podoba</h3>
-            <p class="timeline-desc">
-              Zacznij od wyboru motywu z naszej biblioteki. 
-            </p>
-            <a href="#" class="timeline-link">Odkryj motywy →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="timeline-item">
-        <div class="timeline-badge">KROK 02</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content right">
-          <div class="timeline-card">
-            <!-- Quick Edit Popup Mockup -->
-            <div class="timeline-mockup editor-popup">
-              <div class="popup-header">
-                <span class="popup-icon">✏️</span>
-                <span class="popup-title">Customize Selection</span>
-              </div>
-              <div class="toolbar">
-                <button class="tool-btn" title="Paint">🖌️</button>
-                <button class="tool-btn" title="Eraser">🧹</button>
-                <button class="tool-btn" title="Delete">🗑️</button>
-                <span class="toolbar-sep"></span>
-                <button class="tool-btn">A+</button>
-                <button class="tool-btn">A−</button>
-                <span class="toolbar-sep"></span>
-                <button class="color-btn">🎨</button>
-              </div>
-              <div class="color-section">
-                <div class="color-box"></div>
-                <span class="color-label">Color</span>
-              </div>
-            </div>
-            <h3 class="timeline-title">Formatuj swoją notatkę</h3>
-            <p class="timeline-desc">
-              Używaj dostępnych narzędzi do formatowania — pogrubienia, 
-              kolorowanie, rozmiar tekstu.
-            </p>
-            <a href="#" class="timeline-link">Poznaj edytor →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="timeline-item">
-        <div class="timeline-badge">KROK 03</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content left">
-          <div class="timeline-card">
-            <!-- Export Dialog Mockup -->
-            <div class="timeline-mockup export-dialog">
-              <div class="export-step-badge">3</div>
-              <h4 class="export-title">Export & Save</h4>
-              <p class="export-subtitle">Download or save your work</p>
-              <button class="export-pdf-btn">📥 Download PDF</button>
-              <button class="save-project-btn">💾 Save Project</button>
-            </div>
-            <h3 class="timeline-title">Udostępnij lub eksportuj</h3>
-            <p class="timeline-desc">
-              Gotowa notatka? Eksportuj jako PDF. Twoje notatki wyglądają profesjonalnie i są gotowe do drukowania.
-            </p>
-            <a href="#" class="timeline-link">Dowiedz się więcej →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Pricing Section -->
   <section id="pricing" class="pricing">
@@ -371,6 +202,76 @@
         </ul>
         <a href="#cta" class="btn-primary">Chcę Premium</a>
         <p class="pricing-footnote">7-dniowy trial • Anulujesz kiedy chcesz</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works timeline -->
+  <section id="how" class="timeline-section">
+    <div class="timeline-header">
+      <p class="eyebrow">Jak to działa</p>
+      <h2>Trzy proste kroki do pięknych notatek</h2>
+      <p class="timeline-subtitle">
+        Nie potrzebujesz instrukcji ani szkoleń. Po prostu otwórz edytor 
+        i zacznij pisać — reszta dzieje się automatycznie.
+      </p>
+    </div>
+
+    <div class="timeline-container">
+      <!-- Timeline line -->
+      <div class="timeline-line"></div>
+
+      <!-- Step 1 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">KROK 01</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content left">
+          <div class="timeline-card">
+            <img src="./images/landing/themes.svg" alt="Wybierz motyw" class="timeline-image" />
+            <h3 class="timeline-title">Wybierz motyw, który Ci się podoba</h3>
+            <p class="timeline-desc">
+              Zacznij od wyboru motywu z naszej biblioteki. Mamy wszystko — 
+              od minimalistycznych czerni i bieli po energetyczne gradienty. 
+              Każdy motyw został zaprojektowany z myślą o czytelności i estetyce.
+            </p>
+            <a href="#" class="timeline-link">Odkryj motywy →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">KROK 02</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content right">
+          <div class="timeline-card">
+            <img src="./images/landing/structure.svg" alt="Formatuj" class="timeline-image" />
+            <h3 class="timeline-title">Pisz i formatuj swoją notatkę</h3>
+            <p class="timeline-desc">
+              Używaj prostych znaczników do formatowania — nagłówki, pogrubienia, 
+              kursywa, listy i wyróżnienia. Edytor automatycznie zamienia je 
+              na pięknie wyglądający tekst.
+            </p>
+            <a href="#" class="timeline-link">Poznaj edytor →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="timeline-item">
+        <div class="timeline-badge">KROK 03</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content left">
+          <div class="timeline-card">
+            <img src="./images/landing/sharing.svg" alt="Udostępnij" class="timeline-image" />
+            <h3 class="timeline-title">Udostępnij lub eksportuj</h3>
+            <p class="timeline-desc">
+              Gotowa notatka? Eksportuj jako PDF lub skopiuj link do dzielenia się 
+              z innymi. Twoje notatki wyglądają profesjonalnie bez dodatkowej pracy.
+            </p>
+            <a href="#" class="timeline-link">Dowiedz się więcej →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -443,7 +344,13 @@
     </div>
   </section>
 
-
+  <!-- CTA -->
+  <section id="cta" class="cta">
+    <h2>Zacznij tworzyć piękne notatki już dziś</h2>
+    <p>Free bez rejestracji i płatności. Gdy zechcesz więcej — Premium odblokuje pełną moc edytora.</p>
+    <a href="./app.html" class="btn-primary">Otwórz edytor →</a>
+    <p class="cta-note">💡 Działa na wszystkich urządzeniach • Nie wymaga instalacji • Free i Premium</p>
+  </section>
 
   <!-- Footer -->
   <footer>

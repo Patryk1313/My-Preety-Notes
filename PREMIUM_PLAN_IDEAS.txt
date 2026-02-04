@@ -1,0 +1,166 @@
+═══════════════════════════════════════════════════════════════
+              AESTHETIC NOTES - PREMIUM PLAN IDEAS
+═══════════════════════════════════════════════════════════════
+
+📊 PRICING
+──────────────────────────────────────────────────────────────
+Free Plan:        $0/month
+Premium Plan:     $4.99/month or $39/year (save 35%)
+
+
+💎 PREMIUM FEATURES - TIER 1 (Must Have)
+──────────────────────────────────────────────────────────────
+
+1. LIMITY I UŻYTKOWANIE
+   ✓ Unlimited uploads (Free: 10/miesiąc)
+   ✓ Większe pliki - 50MB (Free: 10MB)
+   ✓ Cloud storage - unlimited projects (Free: 5 projektów)
+   ✓ Batch conversion - wiele plików naraz
+
+2. MOTYWY I AI
+   ✓ Premium themes - 20 dodatkowych motywów (Free: 8)
+   ✓ AI Priority - szybsze i lepsze generowanie
+   ✓ Custom theme builder - własne kolory i czcionki
+   ✓ Style templates (Minimal, Academic, Creative, Artistic)
+
+3. EXPORT I JAKOŚĆ
+   ✓ No watermark (Free ma subtelny watermark)
+   ✓ HD PDF export - lepsza jakość
+   ✓ Extra formaty: EPUB, HTML standalone, Markdown
+   ✓ Custom fonts upload - własne czcionki
+
+
+💡 PREMIUM FEATURES - TIER 2 (Nice to Have)
+──────────────────────────────────────────────────────────────
+
+4. PRODUKTYWNOŚĆ
+   ✓ Wersjonowanie - historia zmian projektów
+   ✓ Collaboration - udostępnianie projektów innym
+   ✓ Templates library - gotowe szablony dla przedmiotów
+   ✓ OCR support - konwersja PDF/obrazu do tekstu
+
+5. ZAAWANSOWANE
+   ✓ API access - integracja z innymi narzędziami
+   ✓ Priority support - szybsza odpowiedź
+   ✓ Analytics - statystyki użytkowania
+   ✓ Advanced AI - summarization, flashcards generation
+
+
+🎯 SUGEROWANY STACK FUNKCJI NA START
+──────────────────────────────────────────────────────────────
+
+FREE TIER:
+- 10 uploadów/miesiąc
+- 8 podstawowych motywów
+- Max 10MB/plik
+- 5 zapisanych projektów
+- Subtelny watermark
+- Standardowy AI (Gemini Free)
+- PDF export basic
+
+PREMIUM TIER:
+- Unlimited uploads
+- 28 motywów (8 basic + 20 premium)
+- Max 50MB/plik
+- Unlimited projects
+- No watermark
+- HD PDF export
+- Custom theme builder
+- Batch conversion
+- AI Priority (lepsze prompty, szybsze)
+- EPUB + Markdown export
+
+
+📈 ROADMAP - CO DODAĆ NAJPIERW
+──────────────────────────────────────────────────────────────
+
+FAZA 1 - MVP Premium (2-3 tygodnie):
+1. System użytkowników (email/password lub Google OAuth)
+2. Limity dla Free (10 uploads/miesiąc, 5 projektów)
+3. Watermark dla Free tier
+4. 20 dodatkowych premium themes
+5. Płatności Stripe/PayPal
+
+FAZA 2 - Rozszerzenie (1 miesiąc):
+6. Batch conversion
+7. Custom theme builder
+8. HD PDF export
+9. EPUB/Markdown export
+10. Większe limity plików (50MB)
+
+FAZA 3 - Zaawansowane (2 miesiące):
+11. OCR support
+12. Templates library
+13. Collaboration/sharing
+14. AI enhancements (flashcards, summary)
+15. API access
+
+
+💰 MONETIZATION STRATEGY
+──────────────────────────────────────────────────────────────
+
+TARGET AUDIENCE:
+- Studenci (główny target)
+- Uczniowie liceum/technikum
+- Nauczyciele
+- Content creators (notatki do YouTube, kursy)
+
+PRICING PSYCHOLOGY:
+- Free tier - wystarczająco dobry, żeby przyciągnąć
+- Premium - $4.99 (poniżej ceny kawy, przystępne dla studentów)
+- Yearly - $39 (3 miesiące gratis, zachęca do long-term)
+
+CONVERSION TACTICS:
+- 7-day Premium trial dla nowych użytkowników
+- "Upgrade now" po przekroczeniu Free limitu
+- Social proof - "Join 10,000+ students"
+- Rabat dla studentów (-20% z mailem .edu)
+
+
+🔒 TECHNICZNE WYMAGANIA
+──────────────────────────────────────────────────────────────
+
+KONIECZNE DO DODANIA:
+1. User authentication system (Passport.js + JWT)
+2. Database dla użytkowników (PostgreSQL lub MongoDB)
+3. Payment gateway (Stripe Checkout)
+4. Usage tracking (Redis lub PostgreSQL)
+5. Email service (SendGrid/Mailgun)
+6. Webhook handling (Stripe events)
+
+BEZPIECZEŃSTWO:
+- Rate limiting per user
+- Input validation
+- Secure file uploads
+- HTTPS only (SSL)
+- Environment variables protection
+
+
+📊 METRICS TO TRACK
+──────────────────────────────────────────────────────────────
+
+KPI:
+- MAU (Monthly Active Users)
+- Conversion rate (Free → Premium)
+- Churn rate
+- Average uploads per user
+- Most popular themes
+- Upload success rate
+- PDF generation time
+- Customer LTV (Lifetime Value)
+
+
+═══════════════════════════════════════════════════════════════
+                         PODSUMOWANIE
+═══════════════════════════════════════════════════════════════
+
+NAJPROSTSZY PREMIUM NA START:
+✓ Limity dla Free: 10 uploads/miesiąc
+✓ Watermark dla Free tier
+✓ Premium: unlimited + no watermark + więcej motywów
+✓ Płatności Stripe
+✓ Login przez Google OAuth (już masz kod!)
+
+TO WYSTARCZY DO TESTOWANIA MONETYZACJI.
+
+Czy mam zacząć implementować któreś z tych funkcji?
