@@ -3,7 +3,7 @@
 
 async function loadThemes() {
   try {
-    const res = await fetch('/themes.json');
+    const res = await fetch('./themes.json');
     const data = await res.json();
     return data.themes || {};
   } catch (e) {
